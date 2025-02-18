@@ -1,21 +1,37 @@
 import Image from "next/image";
 import Link from "next/link";
 import Logo from "@/public/logo.png";
-import { Button } from "../ui/button";
+import { Button, buttonVariants } from "../ui/button";
 import { ThemeToggle } from "./ThemeToggle";
+import { auth, signOut } from "@/app/utils/auth";
 
-export function Navbar() {
+export async function Navbar() {
+  const session = await auth();
+
   return (
     <nav className="flex items-center justify-between py-5 ">
       <Link href="/" className="flex items-center gap-2">
         <Image src={Logo} alt="logo" width={40} height={40} />
         <h1 className="text-2xl font-bold">
-          Work<span className="text-primary">Sphere</span>
+          Job<span className="text-primary">Sphere</span>
         </h1>
       </Link>
       <div className="flex items-center gap-4">
         <ThemeToggle />
-        <Button>Log In</Button>
+        {session?.user ? (
+          <form
+            action={async () => {
+              "use server";
+              await signOut({ redirectTo: "/" });
+            }}
+          >
+            <Button>Logout</Button>
+          </form>
+        ) : (
+          <Link href="/login" className={buttonVariants({variant:"outline", size:"lg"})}>
+            Login
+          </Link>
+        )}
       </div>
     </nav>
   );
