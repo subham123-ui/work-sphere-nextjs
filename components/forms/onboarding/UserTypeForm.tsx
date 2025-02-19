@@ -1,13 +1,15 @@
 import { Button } from "@/components/ui/button";
 import { Building2, UserRound } from "lucide-react";
 
-type UserSelectionType = "company" | "jobSeeker" ;
+type UserSelectionType = "company" | "jobSeeker";
 
 interface UserTypeSelectionProps {
   onSelect: (type: UserSelectionType) => void;
 }
 
-export default function UserTypeSelection({onSelect}: UserTypeSelectionProps) {
+export default function UserTypeSelection({
+  onSelect,
+}: UserTypeSelectionProps) {
   return (
     <div className="space-y-8">
       <div className=" text-center space-y-2">
@@ -18,6 +20,7 @@ export default function UserTypeSelection({onSelect}: UserTypeSelectionProps) {
       </div>
       <div className="grid gap-4">
         <Button
+          onClick={() => onSelect("company")}
           variant={"outline"}
           className="w-full h-auto p-6 items-center gap-4 border-2 transition-all duration-200 hover:border-primary hover:bg-primary/5"
         >
@@ -32,6 +35,7 @@ export default function UserTypeSelection({onSelect}: UserTypeSelectionProps) {
           </div>
         </Button>
         <Button
+          onClick={() => onSelect("jobSeeker")}
           variant={"outline"}
           className="w-full h-auto p-6 items-center gap-4 border-2 transition-all duration-200 hover:border-primary hover:bg-primary/5"
         >
