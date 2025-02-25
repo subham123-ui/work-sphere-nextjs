@@ -5,6 +5,12 @@ import { z } from "zod";
 import { companySchema, jobSeekerSchema } from "./utils/zodSchema";
 import { prisma } from "./utils/db";
 import { redirect } from "next/navigation";
+import arcjet from "./utils/arcjet";
+
+
+const aj = arcjet.withRules(
+    
+);
 
 
 export async function createCompany(data: z.infer<typeof companySchema>) {
