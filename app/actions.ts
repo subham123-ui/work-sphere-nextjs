@@ -5,12 +5,20 @@ import { z } from "zod";
 import { companySchema, jobSeekerSchema } from "./utils/zodSchema";
 import { prisma } from "./utils/db";
 import { redirect } from "next/navigation";
-import arcjet from "./utils/arcjet";
+import arcjet, { detectBot, shield } from "./utils/arcjet";
 
 
-const aj = arcjet.withRules(
-    
-);
+const aj = arcjet.withRule(
+
+    shield({
+        mode:"DRY_RUN"
+    })
+).withRule(
+    detectBot({
+        enabled: true,
+        logLevel: "info"
+    })
+)
 
 
 export async function createCompany(data: z.infer<typeof companySchema>) {
