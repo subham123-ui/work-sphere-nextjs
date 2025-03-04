@@ -6,6 +6,7 @@ import { companySchema, jobSeekerSchema } from "./utils/zodSchema";
 import { prisma } from "./utils/db";
 import { redirect } from "next/navigation";
 import arcjet, { detectBot, shield } from "./utils/arcjet";
+import { request } from "@arcjet/next";
 
 
 const aj = arcjet.withRule(
@@ -15,14 +16,21 @@ const aj = arcjet.withRule(
     })
 ).withRule(
     detectBot({
-        enabled: true,
-        logLevel: "info"
+        mode    : "LIVE",
+        allow: []
     })
 )
 
 
 export async function createCompany(data: z.infer<typeof companySchema>) {
     const session = await requireUser();
+
+    const req = await request()
+
+    const decision = await aj.protect(req);
+
+
+    if (decision.isDenied())
 
     const validateData = companySchema.parse(data);
 
