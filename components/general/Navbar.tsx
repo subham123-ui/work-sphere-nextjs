@@ -17,22 +17,28 @@ export async function Navbar() {
           Job<span className="text-primary">Sphere</span>
         </h1>
       </Link>
-      
+
       {/* Desktop Navigation */}
 
       <div className="hidden md:flex items-center gap-5">
         <ThemeToggle />
-        <Link className={buttonVariants({size:"lg"})} href="/post-job">
-        Post Job
+        <Link className={buttonVariants({ size: "lg" })} href="/post-job">
+          Post Job
         </Link>
         {session?.user ? (
-          <UserDropdown/>
-        ):(
-          <Link className={buttonVariants({variant:"outline", size:"lg"})} href="/login">
-          Login
+          <UserDropdown
+            email={session.user.email as string}
+            name={session.user.name as string}
+            image={session.user.image as string}
+          />
+        ) : (
+          <Link
+            className={buttonVariants({ variant: "outline", size: "lg" })}
+            href="/login"
+          >
+            Login
           </Link>
         )}
-
       </div>
     </nav>
   );
