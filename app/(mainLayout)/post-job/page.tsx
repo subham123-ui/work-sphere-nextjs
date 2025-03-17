@@ -1,4 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
+import { CreateJobForm } from "@/components/forms/CreateJobForm";
 import {
   Card,
   CardContent,
@@ -78,11 +79,7 @@ const testimonials = [
 export default function PostJobPage() {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-5">
-      <Card className="col-span-1 lg:col-span-2">
-        <CardHeader>
-          <CardTitle>Post a Job. Hey this is a form</CardTitle>
-        </CardHeader>
-      </Card>
+      <CreateJobForm/>
 
       <div className="col-span-1">
         <Card>
@@ -128,7 +125,7 @@ export default function PostJobPage() {
             {/* We will render stats here */}
             <div className="grid grid-cols-2 gap-4">
               {stats.map((stat) => (
-                <div key={stat.id} className="">
+                <div key={stat.id} className="rounded-lg bg-muted p-4">
                   <h4 className="text-2xl font-bold">{stat.value}</h4>
                   <p className="text-sm text-muted-foreground">{stat.label}</p>
                 </div>
