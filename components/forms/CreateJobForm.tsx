@@ -85,6 +85,37 @@ export function CreateJobForm() {
                 />
 
             </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <FormField
+                control={form.control}
+                name="location"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Job Location</FormLabel>
+                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                        <FormControl>
+                            <SelectTrigger>
+                                <SelectValue placeholder="Select Employment Type" />
+                            </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                            <SelectGroup>
+                                <SelectLabel>Employment Type</SelectLabel>
+                                <SelectItem value="full-time">Full Time</SelectItem>
+                                <SelectItem value="part-time">Part Time</SelectItem>
+                                <SelectItem value="contract">Contract</SelectItem>
+                                <SelectItem value="internship">Internship</SelectItem>
+                            </SelectGroup>
+                        </SelectContent>
+
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+                
+                />
+
+            </div>
           </CardContent>
         </Card>
       </form>
