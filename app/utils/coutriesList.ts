@@ -1,12 +1,21 @@
-export function getFlagEmoji(location: string): string {
-    const cleanLocation = location.trim().toLowerCase();
+"use client";
+
+export default function getFlagEmoji(location: string | undefined): string | undefined {
+  if (!location) return undefined;
+
+  const cleanLocation = location.trim().toLowerCase();
+
+  const country = countryList.find(({ name }) => 
+      cleanLocation.includes(` ${name.toLowerCase()} `) || 
+      cleanLocation.endsWith(name.toLowerCase()) || 
+      cleanLocation.startsWith(name.toLowerCase())
+  );
+
   
-    const country = countryList.find((country) =>
-      cleanLocation.includes(country.name.toLowerCase())
-    );
-  
-    return country?.flagEmoji || "";
-  }
+
+  return country?.flagEmoji;
+}
+
   
   export const countryList = [
     {
