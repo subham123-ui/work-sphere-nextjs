@@ -24,6 +24,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
+import SalaryRangeSelector from "../general/SalaryRangeSelector";
 
 export function CreateJobForm() {
   const form = useForm<z.infer<typeof jobSchema>>({
@@ -130,7 +131,7 @@ export function CreateJobForm() {
                           <SelectLabel>Location</SelectLabel>
                           {countryList.map((country ) => (
                             <SelectItem key={country.code} value={country.name}>
-                              <span role="img">{country.flagEmoji}</span>
+                              <span >{country.flagEmoji}</span>
                               <span className="pl-2">{country.name}</span>
                               
                             </SelectItem>
@@ -142,6 +143,14 @@ export function CreateJobForm() {
                   </FormItem>
                 )}
               />
+
+              <FormItem>
+                <FormLabel>Salary Range</FormLabel>
+                <FormControl>
+                  <SalaryRangeSelector/>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
             </div>
           </CardContent>
         </Card>
