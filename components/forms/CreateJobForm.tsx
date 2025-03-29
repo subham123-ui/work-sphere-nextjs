@@ -377,7 +377,10 @@ export function CreateJobForm() {
                 name="listingDuration"
                 render={({ field }) => (
                   <FormItem>
-                    <FormControl></FormControl>
+                    <FormControl>
+                      <p>components inside here</p>
+                    </FormControl>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
