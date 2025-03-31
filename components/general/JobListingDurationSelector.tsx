@@ -22,12 +22,7 @@ export function JobListingDurationSelector({ field }: iAppProps) {
               className="sr-only"
               
             />
-            <label
-              htmlFor={`duration-${item.days}`}
-              className="text-sm font-medium text-gray-900"
-            >
-              {item.description}
-            </label>
+            
           </div>
         ))}
       </div>
