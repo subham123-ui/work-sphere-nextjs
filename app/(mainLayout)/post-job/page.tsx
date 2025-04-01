@@ -1,4 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
+import { prisma } from "@/app/utils/db";
+import { requireUser } from "@/app/utils/requireUser";
 import { CreateJobForm } from "@/components/forms/CreateJobForm";
 import {
   Card,
@@ -10,6 +12,7 @@ import {
 import ArcjetLogo from "@/public/arcjet.jpg";
 import IngestLogo from "@/public/inngest-locale.png";
 import Image from "next/image";
+import { redirect } from "next/navigation";
 
 const stats = [
   {
@@ -76,10 +79,41 @@ const testimonials = [
   },
 ];
 
-export default function PostJobPage() {
+async function getCompany(userId: string) {
+  const data = await prisma.company.findUnique({
+    where: {
+      userId: userId,
+    },
+    select: {
+      name: true,
+      location: true,
+      about: true,
+      logo: true,
+      xAccount: true,
+      website: true,
+    },
+  });
+
+  if (!data) {
+    return redirect("/");
+  }
+
+  return data;
+}
+
+export default async function PostJobPage() {
+  const session = await requireUser();
+  const data = await getCompany(session.id as string);
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-5">
-      <CreateJobForm/>
+      <CreateJobForm
+        companyAbout={data.about}
+        companyLocation={data.location}
+        companyName={data.name}
+        companyLogo={data.logo}
+        companyXAccount={data.xAccount}
+        companyWebsite={data.website}
+      />
 
       <div className="col-span-1">
         <Card>

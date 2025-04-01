@@ -17,7 +17,7 @@ export default function SalaryRangeSelector({
   minSalary,
   maxSalary,
   step,
-  currency,
+
 }: iAppProps) {
   const { field: fromFiled } = useController({
     name: "salaryFrom",
