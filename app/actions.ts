@@ -8,6 +8,7 @@ import { redirect } from "next/navigation";
 import arcjet, { detectBot, shield } from "./utils/arcjet";
 import { request } from "@arcjet/next";
 import { stripe } from "./utils/stripe";
+import { JobListingDurationPricing } from "./utils/JobListingDurationPricing";
 
 
 const aj = arcjet.withRule(
@@ -136,11 +137,11 @@ export async function createJob(data: z.infer<typeof jobSchema>) {
             },
             data: {
                 stripeCustomerId: customer.id,
-            },  
+            },
         })
     }
 
-    await prisma.jobPost.create({
+    const jobpost = await prisma.jobPost.create({
         data: {
             jobDescription: validateData.jobDescription,
             jobTitle: validateData.jobTitle,
@@ -152,6 +153,52 @@ export async function createJob(data: z.infer<typeof jobSchema>) {
             benefits: validateData.benefits,
             companyId: company.id,
         },
+
+        select: {
+            id: true,
+        },
     });
-    return redirect("/");
+
+
+
+    const pricingTier = JobListingDurationPricing.find(
+        (tier) => tier.days === validateData.listingDuration
+    );
+
+    if (!pricingTier) {
+        throw new Error("Invalid pricing tier");
+    }
+
+    const session = await stripe.checkout.sessions.create({
+        customer: stripeCustomerId,
+        line_items: [
+            {
+                price_data: {
+                    product_data: {
+                        name: `Job Listing - ${pricingTier.days} Days`,
+                        description: pricingTier.description,
+                        images: ['https://527s5k98ud.ufs.sh/f/6XTjim3LmvibpKbUEEnWyT5X6rDAmti9cQPHxfuOlnd4vVMG']
+                    },
+                    currency: "USD",
+                    unit_amount: pricingTier.price * 100,
+                },
+                quantity: 1,
+            },
+        ],
+
+        metadata: {
+            jobId: jobpost.id,
+        },
+
+        mode: "payment",
+        success_url: `${process.env.NEXT_PUBLIC_URL}/payment/success`,
+        cancel_url: `${process.env.NEXT_PUBLIC_URL}/payment/cancel`,
+    });
+
+
+
+
+
+
+    return redirect(session.url as string);
 }

@@ -22,7 +22,7 @@ model User {
   accounts      Account[]
   sessions      Session[]
 
-  stripeCustomerId String?
+  stripeCustomerId String? @unique
 
   userType UserType?
 
