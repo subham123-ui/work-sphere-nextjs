@@ -2,10 +2,20 @@
 "use client";
 
 import { countryList } from "@/app/utils/coutriesList";
+import { createJob } from "@/app/actions";
 import { jobSchema } from "@/app/utils/zodSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { XIcon } from "lucide-react";
+import Image from "next/image";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import BenefitsSelector from "../general/BenefitsSelector";
+import { JobListingDurationSelector } from "../general/JobListingDurationSelector";
+import SalaryRangeSelector from "../general/SalaryRangeSelector";
+import { UploadDropzone } from "../general/UploadThingRexported";
+import { JobDescriptionEditor } from "../richTextEditor.tsx/JobDescriptionEditor";
+import { Button } from "../ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import {
   Form,
@@ -25,18 +35,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
-import SalaryRangeSelector from "../general/SalaryRangeSelector";
-import { JobDescriptionEditor } from "../richTextEditor.tsx/JobDescriptionEditor";
-import BenefitsSelector from "../general/BenefitsSelector";
-import Image from "next/image";
-import { Button } from "../ui/button";
 import { Textarea } from "../ui/textarea";
-import { XIcon } from "lucide-react";
-import { UploadDropzone } from "../general/UploadThingRexported";
-import { JobListingDurationSelector } from "../general/JobListingDurationSelector";
-import { createJob } from "@/app/actions";
-import { useState } from "react";
-
 interface iAppProps {
   companyName: string;
   companyLocation: string;
