@@ -174,7 +174,7 @@ export async function createJob(data: z.infer<typeof jobSchema>) {
         name: "job/created",
         data: {
             jobId: jobpost.id,
-            expirationDays: validateData.listingDuration,
+            expirationDays: validateData.listingDuration, 
         }
     })
 

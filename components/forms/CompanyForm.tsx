@@ -22,7 +22,7 @@ import { companySchema } from "@/app/utils/zodSchema";
 import { useState } from "react";
 
 
-import { countryList } from "@/app/utils/coutriesList";
+import { countryList } from "@/app/utils/countriesList";
 import {
     Select,
     SelectContent,
@@ -66,7 +66,7 @@ export default function CompanyForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6" id="company-form">
         {/* Two column layout for basic info */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <FormField
@@ -205,7 +205,7 @@ export default function CompanyForm() {
                     <UploadDropzone
                       endpoint="imageUploader"
                       onClientUploadComplete={(res) => {
-                        field.onChange(res[0].url);
+                        field.onChange(res[0].ufsUrl);
                         console.log("Logo uploaded successfully!");
                       }}
                       onUploadError={() => {

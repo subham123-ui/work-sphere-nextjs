@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { countryList } from "@/app/utils/coutriesList";
+import { countryList } from "@/app/utils/countriesList";
 import { createJob } from "@/app/actions";
 import { jobSchema } from "@/app/utils/zodSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -89,10 +89,11 @@ export function CreateJobForm({
   }
 
   return (
-    <Form {...form}>
+    <Form {...form} >
       <form
         className="col-span-1 lg:col-span-2 flex flex-col gap-8"
         onSubmit={form.handleSubmit(onSubmit)}
+        id="job-form"
       >
         <Card>
           <CardHeader>
@@ -240,7 +241,7 @@ export function CreateJobForm({
                   <FormItem>
                     <FormLabel>Company Name</FormLabel>
                     <FormControl>
-                      <Input placeholder="Company Name" {...field} />
+                      <Input placeholder="Company Name" {...field}  />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -384,7 +385,7 @@ export function CreateJobForm({
                         <UploadDropzone
                           endpoint="imageUploader"
                           onClientUploadComplete={(res) => {
-                            field.onChange(res[0].url);
+                            field.onChange(res[0].ufsUrl);
                             // toast.success("Logo uploaded successfully!");
                           }}
                           onUploadError={() => {
@@ -410,7 +411,7 @@ export function CreateJobForm({
             <CardTitle>Job Listing Duration</CardTitle>
             <CardContent>
               <FormField
-                control={form.control}
+                control={form.control} 
                 name="listingDuration"
                 render={({ field }) => (
                   <FormItem>

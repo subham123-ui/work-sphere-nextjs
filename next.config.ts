@@ -11,6 +11,12 @@ const nextConfig: NextConfig = {
         port: "",
         
       },
+      {
+        protocol: "https",
+        hostname: "utfs.io",
+        port: "",
+        
+      },
     ]
   }
 };

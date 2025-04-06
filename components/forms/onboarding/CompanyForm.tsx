@@ -20,7 +20,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { countryList } from "@/app/utils/coutriesList";
+import { countryList } from "@/app/utils/countriesList";
 import { Textarea } from "@/components/ui/textarea";
 import { UploadDropzone } from "@/components/general/UploadThingRexported";
 import { createCompany } from "@/app/actions";
