@@ -1,4 +1,6 @@
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Heart } from "lucide-react";
 
 export default function JobIdPage() {
   return (
@@ -19,7 +21,15 @@ export default function JobIdPage() {
                 </Badge>
             </div>
           </div>
+          <Button variant={"outline"}>
+            <Heart className="size-4"/>
+            Save Job
+          </Button>
         </div>
+        {/* Description */}
+        <section>
+            <p>This is the job description...</p>
+        </section>
       </div>
     </div>
   );
