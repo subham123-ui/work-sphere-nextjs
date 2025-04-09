@@ -19,7 +19,7 @@ export default function JobIdPage() {
                 </Badge>
                 <span className="hidden md:inline text-muted-foreground">*</span>
                 <Badge>
-                    Germany
+                    France
                 </Badge>
             </div>
           </div>
