@@ -1,25 +1,19 @@
-"use client";
-
-export function getFlagEmoji(location: string): string {
-  const cleanLocation = location.trim().toLowerCase();
+export function getFlagEmoji(location: string) {
+  const cleanLocation = location.trim().toLocaleLowerCase();
 
   const country = countryList.find((country) =>
-    cleanLocation.includes(country.name.toLowerCase())
+    cleanLocation.includes(country.name.toLocaleLowerCase())
   );
 
   return country?.flagEmoji || "";
 }
 
-
-
-  
 export const countryList = [
   {
     name: "Afghanistan",
     code: "AF",
     phoneCode: "+93",
     flagEmoji: "🇦🇫",
-    
   },
   {
     name: "Aland Islands",
@@ -1468,4 +1462,3 @@ export const countryList = [
     flagEmoji: "🇿🇼",
   },
 ];
-
