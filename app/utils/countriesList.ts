@@ -5,7 +5,7 @@ export function getFlagEmoji(location: string) {
     cleanLocation.includes(country.name.toLocaleLowerCase())
   );
 
-  return country?.flagEmoji || "";
+  return country?.flagEmoji || "🌍";
 }
 
 export const countryList = [
