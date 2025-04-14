@@ -8,7 +8,7 @@ interface iAppProps {
     description: string;
     buttonText: string;
     href: string;
-}
+};
 
 export function EmptyState({title, description, buttonText, href}: iAppProps) {
   return (
