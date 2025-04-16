@@ -21,9 +21,7 @@ export function EmptyState({title, description, buttonText, href}: iAppProps) {
       <Link href={href} className={buttonVariants()}>
       <PlusCircle/> {buttonText}
       </Link>
-      <Link href={href} className={buttonVariants()}>
-      <PlusCircle/> {buttonText}
-      </Link>
+      
     </div>
   );
 }
