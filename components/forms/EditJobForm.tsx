@@ -31,10 +31,11 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { jobSchema } from "@/app/utils/zodSchema";
-import { SalaryRangeSelector } from "../general/SalaryRangeSelector";
+// import { SalaryRangeSelector } from "../general/SalaryRangeSelector";
 import JobDescriptionEditor from "../richTextEditor/JobDescriptionEditor";
 import BenefitsSelector from "../general/BenefitsSelector";
 import { updateJobPost } from "@/app/actions";
+import SalaryRangeSelector from "../general/SalaryRangeSelector";
 
 interface iAppProps {
   jobPost: {
@@ -67,7 +68,7 @@ export function EditJobForm({ jobPost }: iAppProps) {
       companyLocation: jobPost.company.location,
       companyName: jobPost.company.name,
       companyWebsite: jobPost.company.website,
-      companyXAccount: jobPost.company.xAccount || "",
+      companyXAccount: jobPost.company.xAccount || ""
       employmentType: jobPost.employmentType,
       jobDescription: jobPost.jobDescription,
       jobTitle: jobPost.jobTitle,
