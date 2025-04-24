@@ -8,8 +8,8 @@ interface iAppProps {
   control: Control<any>;
   minSalary: number;
   maxSalary: number;
-  step: number;
-  currency: string;
+  step?: number;
+  currency?: string;
 }
 
 export default function SalaryRangeSelector({

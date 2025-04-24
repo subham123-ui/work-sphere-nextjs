@@ -1,6 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { countryList } from "@/app/utils/countriesList";
+import { XIcon } from "lucide-react";
+import Image from "next/image";
+
+import { Button } from "../ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import {
   Form,
@@ -21,21 +26,20 @@ import {
   SelectValue,
 } from "../ui/select";
 import { Textarea } from "../ui/textarea";
-import { XIcon } from "lucide-react";
-import { Button } from "../ui/button";
-import Image from "next/image";
-import { toast } from "sonner";
-import { UploadDropzone } from "../general/UploadThingReExport";
-import { useState } from "react";
-import { z } from "zod";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+
 import { jobSchema } from "@/app/utils/zodSchema";
-// import { SalaryRangeSelector } from "../general/SalaryRangeSelector";
-import JobDescriptionEditor from "../richTextEditor/JobDescriptionEditor";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+
 import BenefitsSelector from "../general/BenefitsSelector";
-import { updateJobPost } from "@/app/actions";
 import SalaryRangeSelector from "../general/SalaryRangeSelector";
+import { UploadDropzone } from "../general/UploadThingRexported";
+import { JobDescriptionEditor } from "../richTextEditor.tsx/JobDescriptionEditor";
+import { editJobPost } from "@/app/actions";
+import { toast } from "sonner";
+
 
 interface iAppProps {
   jobPost: {
@@ -48,7 +52,7 @@ interface iAppProps {
     jobDescription: string;
     benefits: string[];
     listingDuration: number;
-    company: {
+    Company: {
       location: string;
       name: string;
       logo: string;
@@ -64,18 +68,18 @@ export function EditJobForm({ jobPost }: iAppProps) {
     resolver: zodResolver(jobSchema),
     defaultValues: {
       benefits: jobPost.benefits,
-      companyDescription: jobPost.company.about,
-      companyLocation: jobPost.company.location,
-      companyName: jobPost.company.name,
-      companyWebsite: jobPost.company.website,
-      companyXAccount: jobPost.company.xAccount || ""
+      companyAbout: jobPost.Company.about,
+      companyLocation: jobPost.Company.location,
+      companyName: jobPost.Company.name,
+      companyWebsite: jobPost.Company.website,
+      companyXAccount: jobPost.Company.xAccount || "",
       employmentType: jobPost.employmentType,
       jobDescription: jobPost.jobDescription,
       jobTitle: jobPost.jobTitle,
       location: jobPost.location,
       salaryFrom: jobPost.salaryFrom,
       salaryTo: jobPost.salaryTo,
-      companyLogo: jobPost.company.logo,
+      companyLogo: jobPost.Company.logo,
       listingDuration: jobPost.listingDuration,
     },
   });
@@ -85,7 +89,7 @@ export function EditJobForm({ jobPost }: iAppProps) {
     try {
       setPending(true);
 
-      await updateJobPost(values, jobPost.id);
+      await editJobPost(values, jobPost.id);
     } catch (error) {
       if (error instanceof Error && error.message !== "NEXT_REDIRECT") {
         toast.error("Something went wrong. Please try again.");
@@ -199,6 +203,8 @@ export function EditJobForm({ jobPost }: iAppProps) {
                     control={form.control}
                     minSalary={30000}
                     maxSalary={1000000}
+                    step={2000}
+                    
                   />
                 </FormControl>
                 <FormMessage>
@@ -215,7 +221,7 @@ export function EditJobForm({ jobPost }: iAppProps) {
                 <FormItem>
                   <FormLabel>Job Description</FormLabel>
                   <FormControl>
-                    <JobDescriptionEditor field={field} />
+                    <JobDescriptionEditor field={field as any} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -229,7 +235,7 @@ export function EditJobForm({ jobPost }: iAppProps) {
                 <FormItem>
                   <FormLabel>Benefits</FormLabel>
                   <FormControl>
-                    <BenefitsSelector field={field} />
+                    <BenefitsSelector field={field as any} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -348,7 +354,7 @@ export function EditJobForm({ jobPost }: iAppProps) {
 
             <FormField
               control={form.control}
-              name="companyDescription"
+              name="companyAbout"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Company Description</FormLabel>
@@ -394,7 +400,7 @@ export function EditJobForm({ jobPost }: iAppProps) {
                       ) : (
                         <UploadDropzone
                           endpoint="imageUploader"
-                          onClientUploadComplete={(res) => {
+                          onClientUploadComplete={(res ) => {
                             field.onChange(res[0].url);
                             toast.success("Logo uploaded successfully!");
                           }}
@@ -415,7 +421,7 @@ export function EditJobForm({ jobPost }: iAppProps) {
         </Card>
 
         <Button type="submit" className="w-full" disabled={pending}>
-          {pending ? "Submitting..." : "Continue"}
+          {pending ? "Submitting..." : "Edit Job Post"}
         </Button>
       </form>
     </Form>
