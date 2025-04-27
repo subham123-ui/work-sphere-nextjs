@@ -14,7 +14,7 @@ import BenefitsSelector from "../general/BenefitsSelector";
 import { JobListingDurationSelector } from "../general/JobListingDurationSelector";
 import SalaryRangeSelector from "../general/SalaryRangeSelector";
 import { UploadDropzone } from "../general/UploadThingRexported";
-import { JobDescriptionEditor } from "../richTextEditor.tsx/JobDescriptionEditor";
+import { JobDescriptionEditor } from "../richTextEditor/JobDescriptionEditor";
 import { Button } from "../ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import {

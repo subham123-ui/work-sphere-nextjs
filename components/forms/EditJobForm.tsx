@@ -36,7 +36,7 @@ import { z } from "zod";
 import BenefitsSelector from "../general/BenefitsSelector";
 import SalaryRangeSelector from "../general/SalaryRangeSelector";
 import { UploadDropzone } from "../general/UploadThingRexported";
-import { JobDescriptionEditor } from "../richTextEditor.tsx/JobDescriptionEditor";
+import { JobDescriptionEditor } from "../richTextEditor/JobDescriptionEditor";
 import { editJobPost } from "@/app/actions";
 import { toast } from "sonner";
 

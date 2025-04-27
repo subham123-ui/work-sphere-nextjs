@@ -14,7 +14,7 @@ export async function Navbar() {
       <Link href="/" className="flex items-center gap-2">
         <Image src={Logo} alt="logo" width={40} height={40} />
         <h1 className="text-2xl font-bold">
-          Job<span className="text-primary">Sphere</span>
+          Work<span className="text-primary">Sphere</span>
         </h1>
       </Link>
 
